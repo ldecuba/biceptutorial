@@ -1,0 +1,23 @@
+# Bicep build outputs
+*.json
+!*.parameters.json
+!*.bicepparam.json
+
+# Azure CLI
+.azure/
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+temp/
+tmp/
