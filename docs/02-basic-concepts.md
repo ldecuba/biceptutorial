@@ -8,33 +8,33 @@ Parameters are inputs to your Bicep template that make your templates reusable a
 
 ### Basic Parameter Syntax
 
-`icep
+Bicep
 param <parameter-name> <data-type> = <default-value>
 `
 
 ### Parameter Data Types
 
 #### String Parameters
-`icep
+Bicep
 param applicationName string
 param location string = 'East US'  // With default value
 param description string = ''       // Empty string default
 `
 
 #### Numeric Parameters
-`icep
+Bicep
 param instanceCount int = 1
 param maxUsers int
 `
 
 #### Boolean Parameters
-`icep
+Bicep
 param enableHttps bool = true
 param deployToProduction bool
 `
 
 #### Array Parameters
-`icep
+Bicep
 param allowedLocations array = [
   'East US'
   'West US'
@@ -45,7 +45,7 @@ param vmSizes array
 `
 
 #### Object Parameters
-`icep
+Bicep
 param networkConfig object = {
   addressPrefix: '10.0.0.0/16'
   subnets: [
@@ -66,13 +66,13 @@ param networkConfig object = {
 Decorators provide metadata and validation for parameters:
 
 #### Description Decorator
-`icep
+Bicep
 @description('The name of the storage account')
 param storageAccountName string
 `
 
 #### Allowed Values
-`icep
+Bicep
 @allowed([
   'Standard_LRS'
   'Standard_GRS'
@@ -82,21 +82,21 @@ param storageAccountType string = 'Standard_LRS'
 `
 
 #### String Length Constraints
-`icep
+Bicep
 @minLength(3)
 @maxLength(24)
 param storageAccountName string
 `
 
 #### Numeric Range Constraints
-`icep
+Bicep
 @minValue(1)
 @maxValue(100)
 param instanceCount int = 1
 `
 
 #### Secure Parameters
-`icep
+Bicep
 @secure()
 param adminPassword string
 
@@ -132,19 +132,19 @@ Variables are used to store computed values and reduce repetition in your templa
 
 ### Basic Variable Syntax
 
-`icep
+Bicep
 var <variable-name> = <value-expression>
 `
 
 ### Simple Variables
-`icep
+Bicep
 var location = 'East US'
 var storageAccountName = 'mystorage001'
 var resourceGroupName = resourceGroup().name
 `
 
 ### Computed Variables
-`icep
+Bicep
 param applicationName string
 param environment string
 
@@ -163,7 +163,7 @@ Resources are the Azure services you want to deploy and manage.
 
 ### Basic Resource Syntax
 
-`icep
+Bicep
 resource <symbolic-name> '<resource-type>@<api-version>' = {
   name: '<resource-name>'
   location: '<location>'
@@ -174,7 +174,7 @@ resource <symbolic-name> '<resource-type>@<api-version>' = {
 `
 
 ### Storage Account Example
-`icep
+Bicep
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'mystorageaccount001'
   location: 'East US'
@@ -193,7 +193,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 ## Best Practices
 
 ### 1. Use Descriptive Names
-`icep
+Bicep
 // Good
 param webAppName string
 var storageAccountName = '${webAppName}storage${uniqueString(resourceGroup().id)}'
@@ -204,7 +204,7 @@ var sa = '${name}${uniqueString(resourceGroup().id)}'
 `
 
 ### 2. Provide Defaults Where Appropriate
-`icep
+Bicep
 param location string = resourceGroup().location
 param environmentType string = 'dev'
 param enableMonitoring bool = false
