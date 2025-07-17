@@ -22,3 +22,4 @@ This example demonstrates the basics of creating and deploying a simple Bicep te
 
 ## Next Steps
 Go to [Example 2](../02-parameters-variables/) to learn about parameters and variables.
+

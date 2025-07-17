@@ -8,8 +8,17 @@ This tutorial will take you from complete beginner to confident Bicep developer.
 
 ### Prerequisites
 
+**Choose one deployment method:**
+
+**Option 1: Azure CLI (Recommended)**
 - Azure CLI installed
-- Bicep CLI installed
+- Bicep CLI installed (via Azure CLI)
+- VS Code with Bicep extension (recommended)
+- Azure subscription with appropriate permissions
+
+**Option 2: Azure PowerShell**
+- Azure PowerShell module installed
+- Bicep CLI installed (via Azure CLI)
 - VS Code with Bicep extension (recommended)
 - Azure subscription with appropriate permissions
 
@@ -86,3 +95,4 @@ Feel free to contribute improvements, additional examples, or corrections!
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+

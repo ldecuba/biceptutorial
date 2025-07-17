@@ -48,9 +48,9 @@ Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy
 
 ### How Bicep Works
 
-`
+
 Bicep Template → Bicep CLI → ARM Template → Azure Resource Manager → Azure Resources
-`
+
 
 ## Setting Up Your Environment
 
@@ -67,9 +67,9 @@ Bicep Template → Bicep CLI → ARM Template → Azure Resource Manager → Azu
 Visit the [Azure CLI installation page](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and follow instructions for your operating system.
 
 #### 2. Install Bicep CLI
-`ash
+
 az bicep install
-`
+
 
 #### 3. Install VS Code Extensions
 - Bicep Extension
@@ -77,20 +77,20 @@ az bicep install
 - Azure Resources Extension
 
 #### 4. Verify Installation
-`ash
+
 az --version
 az bicep version
-`
+
 
 Expected output:
-`
+
 azure-cli                         2.54.0
 bicep                            0.23.1
-`
+
 
 ### Login to Azure
 
-`ash
+
 # Login interactively
 az login
 
@@ -102,7 +102,7 @@ az account set --subscription "Your Subscription Name"
 
 # Verify current subscription
 az account show --output table
-`
+
 
 ## Your First Bicep Template
 
@@ -110,9 +110,9 @@ Let's create a simple storage account to understand the basics.
 
 ### Create Your First Template
 
-Create a file called `storage.bicep`:
+Create a file called storage.bicep:
 
-`icep
+icep
 // This is a comment in Bicep
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'mystorageaccount001'
@@ -125,29 +125,29 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     accessTier: 'Hot'
   }
 }
-`
+
 
 ### Understanding the Template
 
 Let's break down each part:
 
-`icep
+icep
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 //  ↑            ↑                       ↑
 //  |            |                       |
 //  |            |                       └── API Version
 //  |            └─────────────────────────── Resource Type
 //  └──────────────────────────────────────── Symbolic Name
-`
 
-- **`resource`**: Keyword that declares a resource
-- **`storageAccount`**: Symbolic name used within the template
-- **`Microsoft.Storage/storageAccounts@2023-01-01`**: Resource type and API version
+
+- **resource**: Keyword that declares a resource
+- **storageAccount**: Symbolic name used within the template
+- **Microsoft.Storage/storageAccounts@2023-01-01**: Resource type and API version
 - **Properties**: Configuration for the resource
 
 ### Deploy Your First Template
 
-`ash
+
 # Create a resource group
 az group create --name rg-bicep-tutorial --location "East US"
 
@@ -156,11 +156,11 @@ az deployment group create \
   --resource-group rg-bicep-tutorial \
   --template-file storage.bicep \
   --name first-deployment
-`
+
 
 ### Verify the Deployment
 
-`ash
+
 # Check deployment status
 az deployment group show \
   --resource-group rg-bicep-tutorial \
@@ -169,7 +169,7 @@ az deployment group show \
 
 # List resources in the group
 az resource list --resource-group rg-bicep-tutorial --output table
-`
+
 
 ## Understanding Bicep Syntax
 
@@ -177,7 +177,7 @@ az resource list --resource-group rg-bicep-tutorial --output table
 
 Every Bicep template has this general structure:
 
-`icep
+icep
 // 1. Target scope (optional)
 targetScope = 'resourceGroup'
 
@@ -201,13 +201,13 @@ resource myStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 // 5. Outputs (return values)
 output storageAccountId string = myStorage.id
 output storageAccountName string = myStorage.name
-`
+
 
 ### Data Types
 
 Bicep supports several data types:
 
-`icep
+icep
 // String
 param applicationName string = 'myapp'
 
@@ -230,24 +230,24 @@ param databaseConfig object = {
   capacity: 10
   maxSizeGB: 250
 }
-`
+
 
 ### String Interpolation
 
-Bicep supports string interpolation using `` syntax (where xpression is a variable or value):
+Bicep supports string interpolation using  syntax (where xpression is a variable or value):
 
-`icep
+icep
 param applicationName string = 'myapp'
 param environment string = 'dev'
 
 var resourceName = '${applicationName}-${environment}'
 var greeting = 'Hello ${applicationName}!'
 var storageAccountName = '${applicationName}${environment}${uniqueString(resourceGroup().id)}'
-`
+
 
 ### Comments
 
-`icep
+icep
 // Single line comment
 
 /*
@@ -260,13 +260,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   location: 'East US'
   // ... rest of configuration
 }
-`
+
 
 ## Common Functions
 
 Bicep provides many built-in functions:
 
-`icep
+icep
 // Generate unique string based on resource group
 var uniqueName = 'storage${uniqueString(resourceGroup().id)}'
 
@@ -287,12 +287,12 @@ var arrayLength = length(myArray)
 // Object functions
 var objectKeys = keys(myObject)
 var hasProperty = contains(myObject, 'propertyName')
-`
+
 
 ## Best Practices for Beginners
 
 ### 1. Use Descriptive Names
-`icep
+icep
 // Good
 resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'primarystorage${uniqueString(resourceGroup().id)}'
@@ -304,10 +304,10 @@ resource sa 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'storage1'
   // ...
 }
-`
+
 
 ### 2. Use Variables for Repeated Values
-`icep
+icep
 // Good
 var location = 'East US'
 var skuName = 'Standard_LRS'
@@ -319,10 +319,10 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     name: skuName
   }
 }
-`
+
 
 ### 3. Add Comments
-`icep
+icep
 // Storage account for application data
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'mystorageaccount'
@@ -332,10 +332,10 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   }
   kind: 'StorageV2'
 }
-`
+
 
 ### 4. Use Consistent Naming Conventions
-`icep
+icep
 // Establish a pattern and stick to it
 var namingPrefix = '${applicationName}-${environment}'
 
@@ -348,7 +348,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2023-01-01' = {
   name: '${namingPrefix}-plan'
   // ...
 }
-`
+
 
 ## Next Steps
 
@@ -361,7 +361,7 @@ Now that you understand the basics, you're ready to move on to:
 ## Quick Reference
 
 ### Essential Commands
-`ash
+
 # Install/update Bicep
 az bicep install
 az bicep upgrade
@@ -384,10 +384,10 @@ az deployment group validate \
 az deployment group what-if \
   --resource-group <rg-name> \
   --template-file <template.bicep>
-`
+
 
 ### Resource Declaration Syntax
-`icep
+icep
 resource <symbolic-name> '<resource-type>@<api-version>' = {
   name: 'actual-resource-name'
   location: 'resource-location'
@@ -395,6 +395,7 @@ resource <symbolic-name> '<resource-type>@<api-version>' = {
     // Resource-specific properties
   }
 }
-`
+
 
 You're now ready to start building more complex templates!
+

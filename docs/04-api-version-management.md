@@ -144,3 +144,4 @@ Effective API version management in Bicep templates requires:
 5. **Test updates** in non-production environments first
 
 By following these practices, you'll ensure your Bicep templates remain maintainable, secure, and up-to-date with the latest Azure capabilities.
+

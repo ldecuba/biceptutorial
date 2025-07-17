@@ -42,3 +42,4 @@ az deployment group show --resource-group rg-bicep-tutorial --name <deployment-n
 
 ## Next Steps
 Go to [Example 5](../05-modules/) to learn about modules.
+

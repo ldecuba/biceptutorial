@@ -190,3 +190,4 @@ az deployment group what-if \
   --template-file storage-with-params.bicep \
   --parameters @storage.parameters.json
 `
+

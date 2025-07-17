@@ -37,3 +37,4 @@ This example demonstrates how Bicep handles resource dependencies automatically 
 
 ## Next Steps
 Go to [Example 4](../04-outputs/) to learn about outputs.
+
