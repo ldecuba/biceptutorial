@@ -1,13 +1,13 @@
-# deploy.ps1 - First Bicep template deployment
+# deploy.ps1 - Common patterns example
 
 param(
     [string]$ResourceGroupName = "rg-bicep-tutorial",
     [string]$Location = "East US"
 )
 
-$DeploymentName = "storage-deployment-20250717-134617"
+$DeploymentName = "conditional-deployment-deployment-20250717-134617"
 
-Write-Host "First Bicep template deployment..." -ForegroundColor Green
+Write-Host "Common patterns example..." -ForegroundColor Green
 Write-Host "Resource Group: $ResourceGroupName" -ForegroundColor Cyan
 Write-Host "Location: $Location" -ForegroundColor Cyan
 Write-Host "Deployment Name: $DeploymentName" -ForegroundColor Cyan
@@ -25,8 +25,7 @@ if ($LASTEXITCODE -ne 0) {
 # Deploy template
 Write-Host "Deploying template..." -ForegroundColor Yellowaz deployment group create `
     --resource-group $ResourceGroupName `
-    --template-file "storage.bicep" `
-    --parameters "@storage.parameters.json" `
+    --template-file "conditional-deployment.bicep" `
     --name $DeploymentName
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Deployment failed" -ForegroundColor Red

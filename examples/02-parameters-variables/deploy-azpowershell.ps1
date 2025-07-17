@@ -1,14 +1,13 @@
-# deploy-azpowershell.ps1
-# Azure PowerShell deployment script
+# deploy-azpowershell.ps1 - Parameters and variables example (Azure PowerShell)
 
 param(
     [string]$ResourceGroupName = "rg-bicep-tutorial",
     [string]$Location = "East US"
 )
 
-$DeploymentName = "storage-with-params-deployment-20250717-123336"
+$DeploymentName = "storage-with-params-deployment-20250717-134617"
 
-Write-Host "Deploying Bicep template using Azure PowerShell..." -ForegroundColor Green
+Write-Host "Parameters and variables example using Azure PowerShell..." -ForegroundColor Green
 Write-Host "Resource Group: $ResourceGroupName" -ForegroundColor Cyan
 Write-Host "Location: $Location" -ForegroundColor Cyan
 Write-Host "Deployment Name: $DeploymentName" -ForegroundColor Cyan
@@ -30,13 +29,18 @@ if (-not $resourceGroup) {
 }
 
 # Deploy template
-Write-Host "Deploying template..." -ForegroundColor Yellow
+Write-Host "
+Deploying template..." -ForegroundColor Yellow
 try {
-    $deployment = New-AzResourceGroupDeployment `
-        -ResourceGroupName $ResourceGroupName `
-        -TemplateFile "storage-with-params.bicep" `  -TemplateParameterFile "storage.parameters.json" `
-        -Name $DeploymentName `
-        -Verbose
+    $deployParams = @{
+        ResourceGroupName = $ResourceGroupName
+        TemplateFile = "storage-with-params.bicep"
+        Name = $DeploymentName
+        Verbose = $true
+    }
+        # Add parameters file
+    $deployParams.TemplateParameterFile = "storage.parameters.json"
+        $deployment = New-AzResourceGroupDeployment @deployParams
 
     if ($deployment.ProvisioningState -eq "Succeeded") {
         Write-Host "

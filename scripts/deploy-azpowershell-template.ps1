@@ -1,16 +1,31 @@
-# deploy-azpowershell.ps1 - First Bicep template deployment (Azure PowerShell)
+# deploy-azpowershell-template.ps1
+# Generic Azure PowerShell deployment script template
 
 param(
     [string]$ResourceGroupName = "rg-bicep-tutorial",
-    [string]$Location = "East US"
+    [string]$Location = "East US",
+    [string]$TemplateFile = "main.bicep",
+    [string]$ParametersFile = "",
+    [string]$DeploymentName = ""
 )
 
-$DeploymentName = "storage-deployment-20250717-134617"
+# Set default deployment name if not provided
+if (-not $DeploymentName) {
+    $templateBaseName = [System.IO.Path]::GetFileNameWithoutExtension($TemplateFile)
+    $DeploymentName = "$templateBaseName-deployment-20250717-133443"
+}
 
-Write-Host "First Bicep template deployment using Azure PowerShell..." -ForegroundColor Green
+Write-Host "Deploying Bicep template using Azure PowerShell..." -ForegroundColor Green
+Write-Host "Template: $TemplateFile" -ForegroundColor Cyan
 Write-Host "Resource Group: $ResourceGroupName" -ForegroundColor Cyan
 Write-Host "Location: $Location" -ForegroundColor Cyan
 Write-Host "Deployment Name: $DeploymentName" -ForegroundColor Cyan
+
+# Check if template file exists
+if (-not (Test-Path $TemplateFile)) {
+    Write-Host "Template file not found: $TemplateFile" -ForegroundColor Red
+    exit 1
+}
 
 # Ensure you're logged in to Azure
 $context = Get-AzContext
@@ -34,13 +49,18 @@ Deploying template..." -ForegroundColor Yellow
 try {
     $deployParams = @{
         ResourceGroupName = $ResourceGroupName
-        TemplateFile = "storage.bicep"
+        TemplateFile = $TemplateFile
         Name = $DeploymentName
         Verbose = $true
     }
-        # Add parameters file
-    $deployParams.TemplateParameterFile = "storage.parameters.json"
-        $deployment = New-AzResourceGroupDeployment @deployParams
+    
+    # Add parameters file if provided
+    if ($ParametersFile -and (Test-Path $ParametersFile)) {
+        Write-Host "Using parameters file: $ParametersFile" -ForegroundColor Cyan
+        $deployParams.TemplateParameterFile = $ParametersFile
+    }
+    
+    $deployment = New-AzResourceGroupDeployment @deployParams
 
     if ($deployment.ProvisioningState -eq "Succeeded") {
         Write-Host "

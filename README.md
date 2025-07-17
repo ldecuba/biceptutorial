@@ -58,7 +58,8 @@ Each example includes:
 3. Update the parameters file with your values
 4. Run the deployment script:
    
-   ./deploy.sh
+   ./deploy.ps1
+   ./deploy-azpowershell.ps1
    
 
 ## 🧪 Testing

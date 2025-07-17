@@ -1,13 +1,13 @@
-# deploy-azpowershell.ps1 - First Bicep template deployment (Azure PowerShell)
+# deploy-azpowershell.ps1 - Common patterns example (Azure PowerShell)
 
 param(
     [string]$ResourceGroupName = "rg-bicep-tutorial",
     [string]$Location = "East US"
 )
 
-$DeploymentName = "storage-deployment-20250717-134617"
+$DeploymentName = "conditional-deployment-deployment-20250717-134617"
 
-Write-Host "First Bicep template deployment using Azure PowerShell..." -ForegroundColor Green
+Write-Host "Common patterns example using Azure PowerShell..." -ForegroundColor Green
 Write-Host "Resource Group: $ResourceGroupName" -ForegroundColor Cyan
 Write-Host "Location: $Location" -ForegroundColor Cyan
 Write-Host "Deployment Name: $DeploymentName" -ForegroundColor Cyan
@@ -34,12 +34,10 @@ Deploying template..." -ForegroundColor Yellow
 try {
     $deployParams = @{
         ResourceGroupName = $ResourceGroupName
-        TemplateFile = "storage.bicep"
+        TemplateFile = "conditional-deployment.bicep"
         Name = $DeploymentName
         Verbose = $true
     }
-        # Add parameters file
-    $deployParams.TemplateParameterFile = "storage.parameters.json"
         $deployment = New-AzResourceGroupDeployment @deployParams
 
     if ($deployment.ProvisioningState -eq "Succeeded") {

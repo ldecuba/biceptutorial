@@ -112,7 +112,7 @@ Let's create a simple storage account to understand the basics.
 
 Create a file called storage.bicep:
 
-icep
+Bicep
 // This is a comment in Bicep
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'mystorageaccount001'
@@ -131,7 +131,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 Let's break down each part:
 
-icep
+Bicep
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 //  ↑            ↑                       ↑
 //  |            |                       |
@@ -177,7 +177,7 @@ az resource list --resource-group rg-bicep-tutorial --output table
 
 Every Bicep template has this general structure:
 
-icep
+Bicep
 // 1. Target scope (optional)
 targetScope = 'resourceGroup'
 
@@ -207,7 +207,7 @@ output storageAccountName string = myStorage.name
 
 Bicep supports several data types:
 
-icep
+Bicep
 // String
 param applicationName string = 'myapp'
 
@@ -236,7 +236,7 @@ param databaseConfig object = {
 
 Bicep supports string interpolation using  syntax (where xpression is a variable or value):
 
-icep
+Bicep
 param applicationName string = 'myapp'
 param environment string = 'dev'
 
@@ -247,7 +247,7 @@ var storageAccountName = '${applicationName}${environment}${uniqueString(resourc
 
 ### Comments
 
-icep
+Bicep
 // Single line comment
 
 /*
@@ -266,7 +266,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 Bicep provides many built-in functions:
 
-icep
+Bicep
 // Generate unique string based on resource group
 var uniqueName = 'storage${uniqueString(resourceGroup().id)}'
 
@@ -292,7 +292,7 @@ var hasProperty = contains(myObject, 'propertyName')
 ## Best Practices for Beginners
 
 ### 1. Use Descriptive Names
-icep
+Bicep
 // Good
 resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'primarystorage${uniqueString(resourceGroup().id)}'
@@ -307,7 +307,7 @@ resource sa 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 
 ### 2. Use Variables for Repeated Values
-icep
+Bicep
 // Good
 var location = 'East US'
 var skuName = 'Standard_LRS'
@@ -322,7 +322,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 
 ### 3. Add Comments
-icep
+Bicep
 // Storage account for application data
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'mystorageaccount'
@@ -335,7 +335,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 
 ### 4. Use Consistent Naming Conventions
-icep
+Bicep
 // Establish a pattern and stick to it
 var namingPrefix = '${applicationName}-${environment}'
 
@@ -387,7 +387,7 @@ az deployment group what-if \
 
 
 ### Resource Declaration Syntax
-icep
+Bicep
 resource <symbolic-name> '<resource-type>@<api-version>' = {
   name: 'actual-resource-name'
   location: 'resource-location'
