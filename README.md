@@ -22,13 +22,6 @@ This tutorial will take you from complete beginner to confident Bicep developer.
 - VS Code with Bicep extension (recommended)
 - Azure subscription with appropriate permissions
 
-### Quick Setup
-
-Run the setup script to install all prerequisites:
-`ash
-./scripts/setup-environment.sh
-`
-
 ## 📚 Tutorial Structure
 
 ### Part 1: Foundation
@@ -61,26 +54,26 @@ Each example includes:
 ## 🏃‍♂️ Quick Start
 
 1. Clone this repository
-2. Navigate to `examples/01-first-template`
+2. Navigate to examples/01-first-template
 3. Update the parameters file with your values
 4. Run the deployment script:
-   `ash
+   
    ./deploy.sh
-   `
+   
 
 ## 🧪 Testing
 
 Validate all templates:
-`ash
+
 ./scripts/validate-all.sh
-`
+
 
 ## 🧹 Cleanup
 
 Clean up all resources created during the tutorial:
-`ash
+
 ./scripts/cleanup.sh
-`
+
 
 ## 🤝 Contributing
 
